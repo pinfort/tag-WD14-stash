@@ -1,0 +1,8 @@
+torch
+timm>=0.9
+huggingface_hub
+safetensors
+numpy
+pillow
+requests
+opencv-python-headless
