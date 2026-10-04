@@ -34,3 +34,9 @@ All created tags have "ignore auto tag" on.
 In Stash's Tags page, filter by parent tag `WD14` (include sub-tags) and delete
 those tags, plus `wd14_embeddings.sqlite`. Note: if an existing tag of yours was
 reused (same name), it stays applied to the items WD14 added it to.
+
+## Tests
+    pip install -r requirements-dev.txt
+    python -m pytest
+
+torch/timm aren't needed: the tests stub them and never load the model or contact Stash.
