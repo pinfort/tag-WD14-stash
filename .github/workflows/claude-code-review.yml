@@ -1,0 +1,39 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+
+jobs:
+  claude-review:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            Review this pull request and give feedback on:
+            - Correctness bugs and edge cases
+            - Code quality and consistency with the surrounding code
+            - Performance concerns (e.g. model loading, batch tagging over many images)
+            - Security concerns (e.g. handling of Stash API credentials, file paths)
+            - Test coverage for the changed behavior
+
+            Be concise and only raise issues worth acting on. Use the repository's
+            CLAUDE.md for style guidance if one exists.
+
+            Use `gh pr comment` with your Bash tool to post the review as a comment on the PR.
+          claude_args: '--allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)"'
