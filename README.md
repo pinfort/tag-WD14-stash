@@ -1,7 +1,9 @@
 # WD14 -> Stash tagger
 
 ## Setup
-1. `pip install -r requirements.txt` (install the CUDA build of torch first if you have a GPU)
+1. `pip install -r requirements.txt` (install the CUDA build of torch first if you have a GPU, e.g.
+   `pip install torch --index-url https://download.pytorch.org/whl/cu128`; check with
+   `python -c "import torch; print(torch.cuda.is_available())"`)
 2. Edit `config.py`: `STASH_URL`, `STASH_API_KEY`, and `PATH_MAP` if needed for scenes.
 
 ## Auto-tagging

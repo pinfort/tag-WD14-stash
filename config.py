@@ -1,7 +1,7 @@
 """Settings for the WD14 -> Stash tagging pipeline. Edit to taste."""
 
 # --- Stash connection ---------------------------------------------------------
-STASH_URL = "http://localhost:9999/graphql"
+STASH_URL = "http://192.168.2.55:9999/graphql"
 STASH_API_KEY = ""  # Stash: Settings > Security > API Key (leave empty if auth is off)
 
 # Map Stash's file paths to paths this script can read (needed for scenes when
